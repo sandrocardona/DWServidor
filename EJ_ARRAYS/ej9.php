@@ -11,7 +11,7 @@
     <?php
         $lenguajes_cliente=array("LC1","LC2","LC3");
         $lenguajes_servidor=array("LS1","LS2","LS3","LS4");
-    
+;    
     ?>
 </body>
 </html>
