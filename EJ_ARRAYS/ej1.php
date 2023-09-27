@@ -9,14 +9,12 @@
 <?php
 echo "<h1>Ejercicio 1</h1>";
 
-function p($pares, $n){
-    for($i=0; $i<2*$n; $i+=2){
-        $pares[$i];
+$pares=array();
+$n=10;
+for($i=0; $i<2*$n; $i+=2){
+        array_push($pares, $i);
+        echo $pares[$i];
     }
-}
-
-echo $pares[$n];
-
 ?>
 
 </body>
