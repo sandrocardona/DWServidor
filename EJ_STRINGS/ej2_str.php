@@ -16,6 +16,7 @@ if(isset($_POST["submit"])){
     <style>
         .div1{background-color:lightblue; border:solid; text-align:center} 
         .div2{background-color:lightgreen; border:solid; text-align:center}
+        .error{color:red}
     </style>
 </head>
 <body>
@@ -25,6 +26,11 @@ if(isset($_POST["submit"])){
         <form action="ej2_str.php" method="post">
         <label for="palabra">Palabra:</label>
         <input type="text" name="palabra" id="palabra" value="<?php if(isset($_POST["palabra"])) echo $_POST["palabra"];?>"/>
+        <?php
+        if($error_form){
+            echo "<p class='error'>introduce más de 3 caracteres</p>";
+        }
+        ?>
         <br><br>
         <input type="submit" value="Comprobar" name="submit" id="submit"/>
         </form>
