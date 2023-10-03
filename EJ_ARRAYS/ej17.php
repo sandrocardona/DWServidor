@@ -8,16 +8,17 @@
 <body>
     <?php
 
-    $familias["Los Simpsons"]["Padre"]="Homer";
-    $familias["Los Simpsons"]["Madre"]="Marge";
-    $familias["Los Simpsons"]["Hijos"]="Bart";
-    $familias["Los Simpsons"]["Hijos"]="Lisa";
-    $familias["Los Simpsons"]["Hijos"]="Maggie";
+    $familias["Los Simpson"]["Padre"]="Homer";
+    $familias["Los Simpson"]["Madre"]="Marge";
+    $familias["Los Simpson"]["Hijos"]["Hijo1"]="Bart";
+    $familias["Los Simpson"]["Hijos"]["Hijo2"]="Lisa";
+    $familias["Los Simpson"]["Hijos"]["Hijo3"]="Maggie";
     $familias["Los Griffin"]["Padre"]="Peter";
     $familias["Los Griffin"]["Madre"]="Lois";
-    $familias["Los Griffin"]["Hijos"]="Chris";
-    $familias["Los Griffin"]["Hijos"]="Meg";
-    $familias["Los Griffin"]["Hijos"]="Stewie";
+    $familias["Los Griffin"]["Hijos"]["Hijo1"]="Chris";
+    $familias["Los Griffin"]["Hijos"]["Hijo2"]="Meg";
+    $familias["Los Griffin"]["Hijos"]["Hijo3"]="Stewie";
+
 
     echo "<ul>";
     foreach($familias as $familia => $valores){
