@@ -27,7 +27,7 @@ if(isset($_POST["submit"])){
         <label for="palabra">Palabra:</label>
         <input type="text" name="palabra" id="palabra" value="<?php if(isset($_POST["palabra"])) echo $_POST["palabra"];?>"/>
         <?php
-        if($error_form){
+        if(isset($_POST["submit"]) && $error_form){
             echo "<p class='error'>introduce más de 3 caracteres</p>";
         }
         ?>
