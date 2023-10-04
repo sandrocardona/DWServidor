@@ -34,8 +34,19 @@
 
         <!-- Campo para el DNI -->
         <label for="dni">DNI:</label><br>
-        <input type="text" id="dni" name="dni"><br><br>
-
+        <input type="text" placeholder="DNI: 11223344Z" id="dni" name="dni" value="<?php if(isset($_POST["dni"])) echo $_POST["dni"];?>"/>
+        <?php
+        if(isset($_POST["btnGuardarCambios"]) && $error_dni){
+            if($_POST["dni"]==""){
+                echo "<span class='error'> Campo vacio </span>";
+            }elseif(!dni_bien_escrito(strtoupper($_POST["dni"]))){
+                echo "<span class='error'> DNI mal escrito </span>";
+            }else{
+                echo "<span class='error'>DNI no valido </span>";
+            }
+        }
+        ?>
+        <br><br>
         <!-- Campo para el sexo -->
         <label for="sexo">Sexo:</label><br>
         <input type="radio" <?php if(isset($_POST["sexo"])&& $_POST["sexo"]=="masculino") echo "checked";?> id="sexo" name="sexo" value="masculino"/> Masculino<br>
