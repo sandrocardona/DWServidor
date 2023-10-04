@@ -1,10 +1,11 @@
 <?php
 if(isset($_POST["submit"])){
-    $texto=trim($_POST["texto"]);
-    $strlen=strlen($texto);
-    $error_form=$texto=="" || $strlen<3;
+    $palabra=trim($_POST["palabra"]);
+    $strlen=strlen($palabra);
+    $error_form=$palabra=="" || $strlen<3;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,36 +20,69 @@ if(isset($_POST["submit"])){
     </style>
 </head>
 <body>
-<div class="div1">
-        <h2>Título</h2>
-        <p>Enunciado</p>
-        <form action="" method="post">
-        <label for="texto">Palabra:</label>
-        <input type="text" name="texto" id="texto" value="<?php if(isset($_POST["texto"])) echo $_POST["texto"];?>"/>
+    <div class="div1">
+        <h2>Palíndromos y capicúas</h2>
+        <p>Introduce palabra o número</p>
+        <form action="ej3_str.php" method="post">
+        <label for="palabra">Palabra:</label>
+        <input type="text" name="palabra" id="palabra" value="<?php if(isset($_POST["palabra"])) echo $_POST["palabra"];?>"/>
         <?php
-        if(isset($_POST["submit"])&& $error_form){
-            if($texto==""){
-                echo "<span class='error'>Campo vacío</span>";
-            }else{
-                echo "<span class='error'>Número romaro incorrecto</span>";
-            }
+        if(isset($_POST["submit"]) && $error_form){
+            echo "<p class='error'>introduce más de 3 caracteres</p>";
         }
         ?>
         <br><br>
         <input type="submit" value="Comprobar" name="submit" id="submit"/>
         </form>
     </div>
+
     <?php
         if(isset($_POST["submit"]) && !$error_form){
+            $palabra_m=strtoupper($palabra);
+/*             $cadena=str_split($palabra_m); */
+/*             for ($i=0; $i < count($cadena) ; $i++) { 
+                echo $cadena[$i];
+            } */
+            $texto="";
+
+            $i=0;
+            $j=$strlen-1;
+            $bien=true;
+
+            for ($i=0; $i < strlen($palabra) ; $i++){ 
+                if($palabra_m[$i]!=" "){
+                    $texto.=$palabra_m[$i];
+                }
+            }
+
+
+            while($i<$j && $bien){
+                if($texto[$i]==$texto[$j]){
+                    $i++;
+                    $j--;
+                }
+                else{
+                    $bien=false;
+                }
+            }
+
+            //Respuesta
+
+            if($bien){
+                $respuesta="la palabra <strong>".$palabra."</strong> es capicúa";
+            }else{
+                $respuesta="la palabra <strong>".$palabra."</strong> no es capicúa";
+            }
 
             echo "<br/>";
             echo "<br/>";
             echo "<div class='div2'>";
             echo "<h2>Respuesta</h2>";
-            echo "<p>".$texto."</p>";
+            echo "<p>".$respuesta."</p>";
             echo "</div>";
 
         }
     ?>
+    
 </body>
 </html>
