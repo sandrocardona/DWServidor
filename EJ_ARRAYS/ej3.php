@@ -7,6 +7,12 @@
 </head>
 <body>
     <?php
+    $meses=array("enero"=>9,"febrero"=>12,"marzo"=>0,"abril"=>17);
+    foreach ($meses as $indice => $value) {
+        if($value>0){
+            echo "<p>$indice</p>";
+        }
+    }
     ?>
 </body>
 </html>

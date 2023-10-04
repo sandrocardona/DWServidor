@@ -7,19 +7,29 @@
 </head>
 <body>
     <?php
-        $sum=0;
-        $media=0;
-        $arr=array();
-        for($i=0; $i<10; $i++){
-            array_push($arr, $i+1);
-        }
+    $n=array();
+    $sum=0;
+    $con=0;
+    for($i=0; $i<10; $i++){
+        array_push($n, $i);
+    }
+    for ($i=0; $i <count($n); $i++) { 
+        echo "<p>".$n[$i]."</p>";
+    }
 
-        for($i=0; $i<count($arr);$i+=2){
-            $sum+=$arr[$i];
+    foreach ($n as $indice => $value) {
+        if($indice%2==0){
+            $sum+=$value;
+            $con++;
+        }else{
+            echo $value." ";
         }
-        print_r($arr);
-        echo $sum;
-        echo $media;
+    }
+
+    $resultado=$sum/$con;
+
+    echo "<p>".$resultado."</p>";
+
     ?>
 </body>
 </html>
