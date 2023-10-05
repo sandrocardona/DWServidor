@@ -4,6 +4,12 @@ if(isset($_POST["submit"])){
     $strlen=strlen($texto);
     $error_form=$texto=="" || $strlen<3;
 }
+
+function eliminar_tildes($cadena){
+
+    $cadena = str_replace(array('á','é','í','ó','ú'),array('a','e', 'i','o','u'),$cadena);
+    return $cadena;
+}
 ?>
 
 <!DOCTYPE html>

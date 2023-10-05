@@ -63,7 +63,11 @@
 
         <!-- Campo para la foto -->
         <label for="foto">Foto de perfil:</label>
-        <input type="file" id="foto" name="foto"><br><br>
+        <input type="file" id="foto" name="archivo"><br><br>
+        <?php
+        
+        ?>
+
 
         <!-- Campo para los comentarios -->
         <label for="comentarios">Comentarios:</label><br>
