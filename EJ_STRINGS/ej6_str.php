@@ -1,60 +1,62 @@
 <?php
-if(isset($_POST["submit"])){
-    $texto=trim($_POST["texto"]);
-    $strlen=strlen($texto);
-    $error_form=$texto=="" || $strlen<3;
-}
+$error_formulario = false;
+$palabra = "";
 
-function eliminar_tildes($cadena){
-
-    $cadena = str_replace(array('á','é','í','ó','ú'),array('a','e', 'i','o','u'),$cadena);
-    return $cadena;
+if (isset($_POST["submit"])) {
+    $palabra = trim($_POST["palabra"]);
+    $error_formulario = empty($palabra) || $palabra < 0 || $palabra > 5000;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ejercicio</title>
     <style>
-        .div1{background-color:lightblue; border:solid; text-align:center} 
-        .div2{background-color:lightgreen; border:solid; text-align:center}
-        .error{color:red}
+        form {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: rgb(112, 210, 255);
+        }
+
+        p {
+            width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: rgb(179, 255, 172);
+        }
     </style>
 </head>
+
 <body>
-<div class="div1">
-        <h2>Título</h2>
-        <p>Enunciado</p>
-        <form action="" method="post">
-        <label for="texto">Palabra:</label>
-        <input type="text" name="texto" id="texto" value="<?php if(isset($_POST["texto"])) echo $_POST["texto"];?>"/>
-        <?php
-        if(isset($_POST["submit"])&& $error_form){
-            if($texto==""){
-                echo "<span class='error'>Campo vacío</span>";
-            }else{
-                echo "<span class='error'>Número romaro incorrecto</span>";
-            }
+    <form action="ej6_str.php" method="post">
+        <label for="palabra">Introduce texto:</label>
+        <textarea name="palabra" id="palabra" cols="30" rows="10" required value="<?php
+        if (isset($_POST['palabra'])) {
+            echo $_POST['palabra'];
+        } else {
+            echo "";
         }
-        ?>
-        <br><br>
-        <input type="submit" value="Comprobar" name="submit" id="submit"/>
-        </form>
-    </div>
+    ?>"></textarea>
+        <input type="submit" value="Comprobar" name="submit">
+    </form>
+
     <?php
-        if(isset($_POST["submit"]) && !$error_form){
-
-            echo "<br/>";
-            echo "<br/>";
-            echo "<div class='div2'>";
-            echo "<h2>Respuesta</h2>";
-            echo "<p>".$texto."</p>";
-            echo "</div>";
-
-        }
+    if (isset($_POST['submit'])) {
+        $acentos = array('á', 'Á', 'ä', 'Ä', 'é', 'É', 'ë', 'Ë', 'í', 'Í', 'ï', 'Ï', 'ó', 'Ó', 'ö', 'Ö', 'ú', 'Ú', 'ü', 'Ü');
+        $sin_acentos = array('a', 'A', 'a', 'A', 'e', 'E', 'e', 'E', 'i', 'I', 'i', 'I', 'o', 'O', 'o', 'O', 'u', 'U', 'u', 'U');
+        $palabra = $_POST['palabra'];
+        $palabra = str_replace($acentos, $sin_acentos, $palabra);
+        echo "<p>La palabra sin acentos es: $palabra</p>";
+    }
     ?>
 </body>
+
 </html>

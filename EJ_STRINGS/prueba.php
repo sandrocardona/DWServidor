@@ -1,9 +1,16 @@
 <?php
 $error_formulario = false;
-$numero_corregido = "";
+$palabra = "";
 
 if (isset($_POST["btnGuardar"])) {
-    $error_formulario = empty($input) || $input < 0 || $input > 5000;
+    $palabra = trim($_POST["palabra"]);
+
+    $error_formulario = empty($palabra) || $palabra < 0 || $palabra > 5000;
+    if (!$error_formulario) {
+        $acentos = array('á', 'Á', 'ä', 'Ä', 'é', 'É', 'ë', 'Ë', 'í', 'Í', 'ï', 'Ï', 'ó', 'Ó', 'ö', 'Ö', 'ú', 'Ú', 'ü', 'Ü');
+        $sin_acentos = array('a', 'A', 'a', 'A', 'e', 'E', 'e', 'E', 'i', 'I', 'i', 'I', 'o', 'O', 'o', 'O', 'u', 'U', 'u', 'U');
+        $palabra = str_replace($acentos, $sin_acentos, $palabra);
+    }
 }
 ?>
 
@@ -35,17 +42,15 @@ if (isset($_POST["btnGuardar"])) {
 </head>
 
 <body>
-    <form action="ej7_str.php" method="post">
-        <label for="numero">Introduce el número a corregir:</label>
-        <input type="text" name="numero" id="numero" required value="<?= isset($_POST['numero']) ? $_POST['numero'] : '' ?>">
+    <form action="prueba.php" method="post">
+        <label for="palabra">Introduce texto:</label>
+        <textarea name="palabra" id="palabra" cols="30" rows="10" required><?= $palabra ?></textarea>
         <input type="submit" value="Comprobar" name="submit">
     </form>
 
     <?php
     if (isset($_POST['submit']) && !$error_formulario) {
-        $input = trim($_POST["numero"]);
-        $numero_corregido = str_replace(',', '.', $input);
-        echo "<p>El número corregido es: $numero_corregido</p>";
+        echo "<p>La palabra sin acentos es: $palabra</p>";
     }
     ?>
 </body>

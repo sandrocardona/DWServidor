@@ -12,7 +12,7 @@ if(isset($_POST["submit"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Palíndromos</title>
     <style>
         .div1{background-color:lightblue; border:solid; text-align:center} 
         .div2{background-color:lightgreen; border:solid; text-align:center}
@@ -21,10 +21,10 @@ if(isset($_POST["submit"])){
 </head>
 <body>
     <div class="div1">
-        <h2>Palíndromos y capicúas</h2>
-        <p>Introduce palabra o número</p>
+        <h2>Frases palíndromas</h2>
+        <p>Introduce frase</p>
         <form action="ej3_str.php" method="post">
-        <label for="palabra">Palabra:</label>
+        <label for="palabra">Frase:</label>
         <input type="text" name="palabra" id="palabra" value="<?php if(isset($_POST["palabra"])) echo $_POST["palabra"];?>"/>
         <?php
         if(isset($_POST["submit"]) && $error_form){
@@ -39,29 +39,9 @@ if(isset($_POST["submit"])){
     <?php
         if(isset($_POST["submit"]) && !$error_form){
             $palabra_m=strtoupper($palabra);
-/*             $cadena=str_split($palabra_m); */
-/*             for ($i=0; $i < count($cadena) ; $i++) { 
-                echo $cadena[$i];
-            } */
-            $texto="";
-
-            $i=0;
-            $j=$strlen-1;
             $bien=true;
-
-            for ($i=0; $i < strlen($palabra) ; $i++){ 
-                if($palabra_m[$i]!=" "){
-                    $texto.=$palabra_m[$i];
-                }
-            }
-
-
-            while($i<$j && $bien){
-                if($texto[$i]==$texto[$j]){
-                    $i++;
-                    $j--;
-                }
-                else{
+            for($i=0; $i<strlen($palabra_m)/2; $i++){
+                if($palabra[$i]!=$palabra[strlen($palabra)-1-$i]){
                     $bien=false;
                 }
             }
@@ -69,9 +49,9 @@ if(isset($_POST["submit"])){
             //Respuesta
 
             if($bien){
-                $respuesta="la palabra <strong>".$palabra."</strong> es capicúa";
+                $respuesta="la frase <strong>".$palabra."</strong> es palíndroma";
             }else{
-                $respuesta="la palabra <strong>".$palabra."</strong> no es capicúa";
+                $respuesta="la frase <strong>".$palabra."</strong> no es palíndroma";
             }
 
             echo "<br/>";

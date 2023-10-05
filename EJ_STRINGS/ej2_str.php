@@ -12,7 +12,7 @@ if(isset($_POST["submit"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Capicúas</title>
     <style>
         .div1{background-color:lightblue; border:solid; text-align:center} 
         .div2{background-color:lightgreen; border:solid; text-align:center}
