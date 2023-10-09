@@ -26,6 +26,21 @@
         $error_archivo=$_FILES["foto"]["name"]!="" && ($_FILES["foto"]["error"] || !getimagesize($_FILES["foto"]["tmp_name"]) || $_FILES["foto"]["size"]>500*1024);
         $error_foto=$_FILES["foto"]["name"]!="" && ($_FILES["foto"]["error"] || !getimagesize($_FILES["foto"]["tmp_name"]) || $_FILES["foto"]["size"]>500*1024);
     }
+
+    $nombre_unico=md5(uniqid(uniqid(),true));
+    $array_nombre=explode(".",$_FILES["foto"]["name"]);
+    $text="";
+    if(count($array_nombre)>1){
+        $ext=end($array_nombre);
+    }
+    $nombre_unico.=".".$ext;
+    @$var=move_uploaded_file($_FILES["foto"]["tmp_name"],"images/".$nombre_unico);
+    if($var){
+
+    }else{
+        echo "<p>No se ha podido mover la imagen a la carpeta destino</p>";
+    }
+
     if(isset($_POST["btnGuardarCambios"])&&!$error_form){
         require "vista_respuesta.php";
     }else{
