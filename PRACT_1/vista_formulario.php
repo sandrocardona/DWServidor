@@ -63,9 +63,15 @@
 
         <!-- Campo para la foto -->
         <label for="foto">Foto de perfil:</label>
-        <input type="file" id="foto" name="archivo"><br><br>
+        <input type="file" id="foto" name="foto"><br><br>
         <?php
-        
+        if(isset($_POST["btnGuardarCambios"]) && $error_foto){
+            if($_FILES["foto"]["error"]){
+                echo "<span class='error'>foto no servidor </span>";
+            }elseif(){
+
+            }
+        }
         ?>
 
 
