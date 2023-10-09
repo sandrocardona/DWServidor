@@ -23,7 +23,8 @@
         $error_comentarios=$_POST["comentarios"]=="";
         $error_dni=$_POST["dni"]=="" || !dni_bien_escrito(strtoupper(($_POST["dni"]))) || !dni_valido(strtoupper(($_POST["dni"])));
         $error_form=$error_nombre||$error_apellidos||$error_clave||$error_sexo||$error_comentarios;
-        $error_archivo=$_FILES["archivo"]["name"]!="" && ($_FILES["archivo"]["error"] || !getimagesize($_FILES["archivo"]["tmp_name"]) || $_FILES["archivo"]["size"]>500*1024);
+        $error_archivo=$_FILES["foto"]["name"]!="" && ($_FILES["foto"]["error"] || !getimagesize($_FILES["foto"]["tmp_name"]) || $_FILES["foto"]["size"]>500*1024);
+        $error_foto=$_FILES["foto"]["name"]!="" && ($_FILES["foto"]["error"] || !getimagesize($_FILES["foto"]["tmp_name"]) || $_FILES["foto"]["size"]>500*1024);
     }
     if(isset($_POST["btnGuardarCambios"])&&!$error_form){
         require "vista_respuesta.php";
