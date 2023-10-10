@@ -20,7 +20,7 @@ if(isset($_POST["btnEnviar"]) && !$error_archivo){
         <?php
         $nombre_nuevo=md5(uniqid(uniqid(),true));
         $array_nombre=explode(".",$_FILES["archivo"]["name"]);
-        $text="";
+        $ext="";
         if(count($array_nombre)>1){
             $ext=end($array_nombre);
         }

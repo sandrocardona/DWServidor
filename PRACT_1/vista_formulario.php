@@ -13,7 +13,7 @@
 <form action="index.php" method="post" enctype="multipart/form-data">
         <!-- Campo para el nombre -->
         <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" value="<?php if(isset($_POST["nombre"])) echo $_POST["nombre"];?>"/>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" value="<?php if(isset($_POST["nombre"])) echo $_POST["nombre"];?>"/>
         <?php
         if(isset($_POST["btnGuardarCambios"])&& $error_nombre){
             echo "<span class='error'>Campo obligatorio</span>";
@@ -21,11 +21,11 @@
         ?>
         <br><br>
 
-        <!-- Campo para los apellidos -->
-        <label for="apellidos">Apellidos:</label><br>
-        <input type="text" id="apellidos" name="apellidos" value="<?php if(isset($_POST["apellidos"])) echo $_POST["apellidos"];?>"/>
+        <!-- Campo para el usuario -->
+        <label for="usuario">Usuario:</label><br>
+        <input type="text" id="usuario" name="usuario" placeholder="usuario" value="<?php if(isset($_POST["usuario"])) echo $_POST["usuario"];?>"/>
         <?php
-        if(isset($_POST["btnGuardarCambios"])&& $error_apellidos){
+        if(isset($_POST["btnGuardarCambios"])&& $error_usuario){
             echo "<span class='error'>Campo obligatorio</span>";
         }
         ?>
@@ -33,7 +33,7 @@
 
         <!-- Campo para la contraseña -->
         <label for="clave">Contraseña:</label><br>
-        <input type="password" id="clave" name="clave">
+        <input type="password" id="clave" name="clave" placeholder="contraseña">
         <?php
         if(isset($_POST["btnGuardarCambios"]) && $error_clave){
             echo "<span class='error'>Campo obligatorio</span>";
@@ -59,18 +59,15 @@
         <label for="sexo">Sexo:</label><br>
         <input type="radio" <?php if(isset($_POST["sexo"])&& $_POST["sexo"]=="masculino") echo "checked";?> id="sexo" name="sexo" value="masculino"/>Hombre<br>
         <input type="radio" <?php if(isset($_POST["sexo"])&& $_POST["sexo"]=="femenino") echo "checked";?> id="sexo" name="sexo" value="femenino"/>Mujer<br>
+        <?php
+        if(isset($_POST["btnGuardarCambios"]) && $error_sexo){
+            echo "<span class='error'>Campo obligatorio</span>";
+        }
+        ?>
         <br><br>
 
-        <!-- Campo para la provincia -->
-<!--         <label for="provincia">Provincia:</label>
-        <select id="provincia" name="provincia">
-            <option value="provincia1">Málaga</option>
-            <option value="provincia2">Cadiz</option>
-            <option value="provincia3">Sevilla</option>
-        </select><br><br> -->
-
         <!-- Campo para la foto -->
-        <label for="foto">Foto(Máximo 500KB):</label>
+        <label for="foto">Incluir mi foto (Archivo de tipo imágen máx 500KB):</label>
         <input type="file" id="foto" name="foto" accept="image/*"><br><br>
         <?php
         if(isset($_POST["btnGuardarCambios"]) && $error_foto){
@@ -82,18 +79,8 @@
                 echo "<span class='error'>El archivo seleccionado pesa demasiado</span>";
             }
         }
+        //Incluir Foto: en hoja respuestas
         ?>
-
-        <!-- Option para lugar nacimiento -->
-    <!--<p>
-            <label for="nacido">Nacido en:</label>
-            <select name="nacido" id="nacido">
-                <option value="Málaga"<?php if(!isset($_POST["nacido"])|| (isset($_POST["nacido"]) && $_POST["nacido"]=="Málaga")) echo "selected";?>>Málaga</option>
-                <option value="Marbella"<?php if(!isset($_POST["nacido"])|| (isset($_POST["nacido"]) && $_POST["nacido"]=="Marbella")) echo "selected";?>>Marbella</option>
-                <option value="Istán"<?php if(!isset($_POST["nacido"])|| (isset($_POST["nacido"]) && $_POST["nacido"]=="Istán")) echo "selected";?>>Istán</option>
-            </select>
-        </p> -->
-
         <p>
             <input type="checkbox" name="subscripcion" id="subscripcion">
             <label for="subscripcion">Subscribirse al boletín de novedades</label>
@@ -103,8 +90,6 @@
 
         <!-- Botón de reinicio para borrar datos -->
         <input type="reset" value="Borrar los datos introducidos">
-
-
     </form>
 </body>
 </html>

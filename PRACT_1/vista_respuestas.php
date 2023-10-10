@@ -9,25 +9,22 @@
 <body>
     <h1>Recogiendo datos</h1>
     <?php
-        echo "<p><strong>Nombre: </strong>" .$_POST["nombre"]. "</p>";
-        echo "<p><strong>Apellidos: </strong>" .$_POST["apellidos"]. "</p>";
-        echo "<p><strong>Contraseña: </strong>" .$_POST["clave"]. "</p>";
+        echo "<p><strong>Nombre: </strong>".$_POST["nombre"]."</p>";
+        echo "<p><strong>Apellidos: </strong>".$_POST["usuario"]."</p>";
+        echo "<p><strong>Contraseña: </strong>".$_POST["clave"]."</p>";
         if(isset($_POST["sexo"]))
-            echo "<p><strong>Nombre: </strong>" .$_POST["sexo"]. "</p>";
+            echo "<p><strong>Nombre: </strong>".$_POST["sexo"]."</p>";
         else
             echo "<p><strong>Sexo: No seleccionado</strong></p>";
 
-        echo "<p><strong>Nacido: </strong>" .$_POST["nacido"]. "</p>";
-        echo "<p><strong>Comentarios: </strong>" .$_POST["comentarios"]. "</p>";
-
         if (isset($_POST["subscripcion"]))
-            echo "<p><strong>Subscripcion: </strong>" .$_POST["subscripcion"]. "</p>";
+            echo "<p><strong>Subscripcion: </strong>Subscripción aceptada</p>";
         else
-            echo "<p><strong>Subscripcion: No</strong></p>";
+            echo "<p><strong>Subscripcion: </strong>No aceptada</p>";
 
-        if($_FILES["foto"]["name"]!=""){
+/*         if($_FILES["foto"]["name"]!=""){
             $ext="";
-            $array_nombre=explode(".",$_FILES["foto"]["nombre"]);
+            $array_nombre=explode(".",$_FILES["foto"]["n"]);
             if(count($array_nombre)>1){
                 $ext=".".end($array_nombre);
             }
@@ -40,7 +37,30 @@
                 echo "<p><strong>Tamaño: </strong>".$_FILES["foto"]["size"]."</p>";
                 echo "<p><strong>Error: </strong>".$_FILES["foto"]["error"]."</p>";
             }else{
-                echo "<p><strong>Foto:</strong>No se ha podido mover la imagen seleccionada a la carpeta destino</p>";
+                echo "<p><strong>Foto: </strong>No se ha podido mover la imagen seleccionada a la carpeta destino</p>";
+            }
+        } */
+
+        if(isset($_POST["btnGuardarCambios"]) && !$error_foto){
+            $nombre_unico=md5(uniqid(uniqid(),true));
+            $array_nombre=explode(".",$_FILES["foto"]["name"]);
+            $ext="";
+            if(count($array_nombre)>1){
+                $ext=end($array_nombre);
+            }
+            $nombre_unico.=".".$ext;
+            @$var=move_uploaded_file($_FILES["foto"]["tmp_name"],"images/".$nombre_unico);
+            if($var){
+                echo "<h3>Información de la imagen seleccionada</h3>";
+                echo "<p><strong>Error: </strong>".$_FILES["foto"]["error"]."</p>";
+                echo "<p><strong>Nombre: </strong>".$_FILES["foto"]["name"]."</p>";
+                echo "<p><strong>Ruta del foto en servidor: </strong>".$_FILES["foto"]["tmp_name"]."</p>";
+                echo "<p><strong>Tipo: </strong>".$_FILES["foto"]["type"]."</p>";
+                echo "<p><strong>Tamaño: </strong>".$_FILES["foto"]["size"]."</p>";
+                echo "<p>La imagen ha sido subida con éxito</p>";
+                echo "<p><img class='tam_imag' src='images/".$nombre_unico."' alt='Foto' title='Foto'/></p>";
+            }else{
+                echo "<p><strong>Foto: </strong>No se ha seleccionado ningún archivo</p>";
             }
         }
     ?>
