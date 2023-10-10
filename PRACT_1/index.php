@@ -26,7 +26,7 @@
         $error_archivo=$_FILES["foto"]["name"]!="" && ($_FILES["foto"]["error"] || !getimagesize($_FILES["foto"]["tmp_name"]) || $_FILES["foto"]["size"]>500*1024);
         $error_foto=$_FILES["foto"]["name"]!="" && ($_FILES["foto"]["error"] || !getimagesize($_FILES["foto"]["tmp_name"]) || $_FILES["foto"]["size"]>500*1024);
     }
-
+if(isset($_POST["btnGuardarCambios"])){
     $nombre_unico=md5(uniqid(uniqid(),true));
     $array_nombre=explode(".",$_FILES["foto"]["name"]);
     $text="";
@@ -40,7 +40,9 @@
     }else{
         echo "<p>No se ha podido mover la imagen a la carpeta destino</p>";
     }
+}
 
+//Al pulsar el boton de Guardar Cambios
     if(isset($_POST["btnGuardarCambios"])&&!$error_form){
         require "vista_respuesta.php";
     }else{
