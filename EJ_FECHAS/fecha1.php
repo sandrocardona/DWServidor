@@ -29,7 +29,7 @@ if(isset($_POST["calcular"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 1</title>
+    <title>fecha_valida 1</title>
     <style>
         .div1{background: lightblue; border: solid; text-align: left}
         .div2{background: lightgreen; border: solid; text-align: left}
