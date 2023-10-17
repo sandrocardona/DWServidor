@@ -26,7 +26,7 @@ if(isset($_POST["btnEnviar"])){
                 if($_POST["num"]=="")
                     echo "<span class='error'>Campo vacío</span>";
                 else
-                    echo "<span class='error'>No has introducido un número</span>";
+                    echo "<span class='error'>No has introducido un número correcto</span>";
             }
             ?>
         </p>
