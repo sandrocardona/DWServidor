@@ -3,7 +3,7 @@ if(isset($_POST["btnEnviar"]))
 {   
     /* No se ha seleccionado archivo. Error de archivo. Archivo distinto a .txt. Archivo mayor que 1mb.  */
 
-    /*echo $_FILES["archivo"]["type"];  Comprobar el type del archivo*/
+    echo $_FILES["archivo"]["type"];
 
     $error_form=$_FILES["archivo"]["name"]=="" || $_FILES["archivo"]["error"] || $_FILES["archivo"]["size"] > 1000*1024 || $_FILES["archivo"]["type"]!="text/plain";
 }
