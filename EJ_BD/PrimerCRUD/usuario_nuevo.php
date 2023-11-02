@@ -7,6 +7,9 @@ if(isset($_POST["btnNuevoUsuario"]) || isset($_POST["btnContInsertar"]))
         $error_pwd=$_POST["pwd"]=="";
         $error_email=$_POST["mail"]=="" || !filter_var($_POST["mail"],FILTER_VALIDATE_EMAIL);
         $error_form=$error_nombre||$error_usuario||$error_pwd||$error_email;
+        if(!$error_form){
+            
+        }
     }
 ?>
 <!DOCTYPE html>
