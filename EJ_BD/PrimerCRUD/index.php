@@ -46,7 +46,8 @@
     echo "<p><button type='submit' name='btnNuevoUsuario'>Insertar nuevo usuario</button></p>";
     echo "</form>";
     
-    mysqli_close($conexion);
+    mysqli_free_result($resultado);//libera memoria
+    mysqli_close($conexion);//cierra la conexión
     ?>
 </body>
 </html>
