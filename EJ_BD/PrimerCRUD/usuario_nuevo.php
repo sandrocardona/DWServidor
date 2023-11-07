@@ -159,7 +159,7 @@ if(isset($_POST["btnNuevoUsuario"]) || isset($_POST["btnContInsertar"]))
         <!-- EMAIL -->
         <p>
         <label for="mail">Email</label>
-        <input type="email" name="mail" id="mail" maxlength="50" value="">
+        <input type="email" name="mail" id="mail" maxlength="50" value="<?php if(isset($_POST["mail"])) echo $_POST["mail"]?>">
         <?php
         if(isset($_POST["btnContInsertar"])&& !$error_email){
             if($_POST["mail"]=="")
