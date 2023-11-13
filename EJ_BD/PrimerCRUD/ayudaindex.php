@@ -122,7 +122,14 @@ if(isset($_POST["btnContBorrar"]))
     }
     elseif(isset($_POST["btnEditar"]))
     {
-        
+        //try
+        //catch
+        if(){
+
+        }
+        else{
+            $mensaje_error_usuario_= "<p>El usuario seleccionado ya no se encuentra registrado en la BD</p>";
+        }
     }
     else
     {
