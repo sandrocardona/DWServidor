@@ -1,3 +1,7 @@
+<?php
+require "src/cts_functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
