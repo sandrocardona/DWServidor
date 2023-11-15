@@ -35,12 +35,17 @@ require "src/cts_functions.php";
 
     // VISTAS NUEVO USUARIO
 
-    if(isset($_POST["btnNewUser"])){
-        echo "<p>Botón pulsado</p>";
-    }
+    require "vistas/nuevo_usuario.php";
 
     // FIN VISTAS NUEVO USUARIO
     
+    // VISTAS BORRAR USUARIO
+    
+    // FIN VISTAS BORRAR USUARIO
+
+    // VISTAS EDITAR USUARIO
+
+    // FIN VISTAS EDITAR USUARIO
 
 
     // TABLA VISTAS USUARIOS
