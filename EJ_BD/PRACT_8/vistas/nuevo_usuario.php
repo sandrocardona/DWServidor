@@ -1,10 +1,10 @@
 <?php
     if(isset($_POST["btnGuardar"])){
         //CONTROL DE ERRORES 
-        $error_nombre=$_POST["nombre"]=="" || strlen($_POST["nombre"]>50);
+        $error_nombre=$_POST["nombre"]=="" || strlen($_POST["nombre"])>50;
         $error_usuario=$_POST["usuario"]=="" || strlen($_POST["usuario"])>30;
         $error_contraseña=$_POST["pwd"]=="" || strlen($_POST["pwd"])>50;
-        $error_dni=$_POST["dni"]=="" || strlen($_POST["dni"])>10;//falta la función que verifica si el dni es válido o no
+        $error_dni=$_POST["dni"]=="" || strlen($_POST["dni"])>10 || !dni_bien_escrito(strtoupper($_POST["dni"])) || !dni_valido(strtoupper($_POST["dni"]));
     }
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 </head>
 <body>
 <h2>Agregar nuevo usuario</h2>
-    <form action="index.php" method="post">
+    <form action="index.php" method="post" enctype="multipart/form-data">
         <!-- NOMBRE -->
          <p>
             <label for="nombre">Nombre:</label><br>
@@ -37,6 +37,15 @@
         <!-- USUARIO -->
          <p><label for='usuario'>Usuario:</label><br>
          <input type="text" name="usuario"></p>
+         <?php
+            if(isset($_POST["btnGuardar"]) && $error_usuario){
+                if($_POST["usuario"]==""){
+                    echo "<span class='error'>Campo vacío</span>";
+                }else{
+                    echo "<span class='error'>Introduce un máximo de 30 caracteres</span>";
+                }
+            }
+         ?>
 
         <!-- CONTRASEÑA -->
          <p><label for="pwd">Contraseña:</label><br>
@@ -56,7 +65,7 @@
 
         <!-- IMAGEN -->
          <p><label for="foto">Incluir mi foto (Máx. 500KB) </label>
-         <input type="file" name="foto"></p>
+         <input type="file" name="foto" accept="image/*"></p>
 
         <!-- BOTONES -->
          <button type="submit" name="btnGuardar">Guardar cambios</button>&nbsp;
