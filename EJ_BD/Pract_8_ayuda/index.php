@@ -1,6 +1,30 @@
 <?php
 require "src/ctes_funciones.php";
 
+if(isset($_POST["btnContBorrarFoto"])){
+
+    try{
+        $conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
+        mysqli_set_charset($conexion,"utf8");
+    }
+    catch(Exception $e)
+    {
+        die(error_page("Práctica 8","<h1>Práctica 8</h1><p>No he podido conectarse a la base de batos: ".$e->getMessage()."</p>"));
+    }
+
+    try{
+        $consulta="update usuarios set foto='no_imagen.jpg' where id_usuario='".$_POST["id_usuario"]."'";
+        mysqli_query($conexion,$consulta);
+    }
+    catch(Exception $e)
+    {
+        mysqli_close($conexion);
+        die(error_page("Práctica 8","<h1>Práctica 8</h1><p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
+    }
+    unlink("Img/".$_POST["foto_bd"]);
+    $_POST["foto_bd"]="no_imagen.jpg";
+}
+
 if(isset($_POST["btnContEditar"]))
 {
 
@@ -248,18 +272,21 @@ if(isset($_POST["btnContBorrar"]))
         table img{width:50px;}
         .enlace{border:none;background:none;cursor:pointer;color:blue;text-decoration:underline}
         .error{color:red}
-        .foto_detalle{width:20%}
+        .foto_detalle{height:250px}
+        .paralelo{display:flex;flex-direction:row}
     </style>
 </head>
 <body>
     <h1>Práctica 8</h1>
     <?php
-    if(isset($_POST["btnEditar"]) || isset($_POST["btnContEditar"]))
+    if(isset($_POST["btnEditar"]) || isset($_POST["btnContEditar"]) || isset($_POST["btnBorrarFoto"]) || isset($_POST["btnNoBorrarFoto"]))
     {
         if(isset($_POST["btnEditar"]))
             $id_usuario=$_POST["btnEditar"];
-        else
+        else if(isset($_POST["btnContEditar"]))
             $id_usuario=$_POST["btnContEditar"];
+        else
+            $id_usuario=$_POST["btnBorrarFoto"];
 
         // Abro conexión si aún no ha sido abierta
         if(!isset($conexion))
@@ -327,7 +354,8 @@ if(isset($_POST["btnContBorrar"]))
             //Pongo el formulario
         ?>
             <h2>Editando el usuario con id <?php echo $id_usuario;?></h2>
-            <form action="index.php" method="post" enctype="multipart/form-data">
+            <div>
+            <form action="index.php" method="post" enctype="multipart/form-data" class="paralelo">
                 <p>
                     <label for="nombre">Nombre</label><br/>
                     <input type="text" name="nombre" id="nombre" maxlength="50" value="<?php echo $nombre;?>"/>
@@ -408,17 +436,31 @@ if(isset($_POST["btnContBorrar"]))
                     }
                     ?>
                 </p>
-                <p>
-                    <img class="foto_detalle" src="Img/<?php echo $foto;?>" title="Foto de Perfil" alt="Foto de Perfil">
-                </p>
+
                 <p>
                     <input type="hidden" name="foto_bd" value="<?php echo $foto;?>">
+                    <input type="hidden" name="id_usuario" value="<?php echo $id_usuario;?>">
                     <button type="submit" name="btnContEditar" value="<?php echo $id_usuario;?>">Continuar</button>
                     <button type="submit" >Atrás</button>
                 </p>
-                
+                </div>
+                <div>
+                    <p class='centrado'>
+                        <img class="foto_detalle" src="Img/<?php echo $foto;?>" title="Foto de Perfil" alt="Foto de Perfil">
+                        <?php
+                        if(isset($_POST["btnBorrarFoto"]))
+                        {
+                            echo "<p>¿Estás seguro que quieres borrar la foto?</p>";
+                            echo "<button name='btnContBorrarFoto' value='".$id_usuario."'>sí</button><button name='btnNoBorrarFoto'>no</button>";
+                        }
+                        elseif($foto!="no_imagen.jpg"){
+                            echo "<button name='btnBorrarFoto' value='<?php echo $id_usuario;?>'>Borrar foto</button>";
+                        }
+                        ?>
+                    </p>
+                </div>
             </form>
-          
+
         <?php  
         }
     }
