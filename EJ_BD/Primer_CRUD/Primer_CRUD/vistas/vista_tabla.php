@@ -34,4 +34,8 @@ while($tupla=mysqli_fetch_assoc($resultado))
 echo "</table>";
 mysqli_free_result($resultado);
 
+if(isset($_SESSION["mensaje"])){
+    echo "<p class='mensaje'></p>";
+}
+
 ?>

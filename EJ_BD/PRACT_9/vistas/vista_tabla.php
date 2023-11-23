@@ -10,6 +10,7 @@
         th{background-color:lightgrey;}
         .enlace{border:none;background:none;color:blue;text-decoration:underline;}
         h1,h2{text-align:center;}
+        img{width: 75px;height: auto;}
     </style>
 </head>
 <body>
@@ -47,7 +48,7 @@
             echo "<tr>";
             echo "<td>".$tupla["idPelicula"]."</td>";
             echo "<td>".$tupla["titulo"]."</td>";
-            echo "<td>".$tupla["caratula"]."</td>";
+            echo "<td><img src='Img/".$tupla["caratula"]."'</td>";
             echo "<td><form action='index.php' method='post'><button class='enlace' type='submit' value='".$tupla["idPelicula"]."'>Borrar</button> - <button class='enlace' type='submit' value='".$tupla["idPelicula"]."'>Editar</button></form></td>";
             echo "</tr>";
         }

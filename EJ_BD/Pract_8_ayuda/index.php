@@ -1,4 +1,7 @@
 <?php
+session_name("Pract8_23_24");
+session_start();
+
 require "src/ctes_funciones.php";
 
 if(isset($_POST["btnContBorrarFoto"])){
@@ -146,6 +149,7 @@ if(isset($_POST["btnContNuevo"]))
         }
         catch(Exception $e)
         {
+            session_destroy();
             die(error_page("Práctica 8","<h1>Práctica 8</h1><p>No he podido conectarse a la base de batos: ".$e->getMessage()."</p>"));
         }
 
@@ -170,6 +174,7 @@ if(isset($_POST["btnContNuevo"]))
             }
             catch(Exception $e)
             {
+                session_destroy();
                 die(error_page("Práctica 8","<h1>Práctica 8</h1><p>No he podido conectarse a la base de batos: ".$e->getMessage()."</p>"));
             }
         }
@@ -178,6 +183,7 @@ if(isset($_POST["btnContNuevo"]))
         if(is_string($error_dni))
         {
             mysqli_close($conexion);
+            session_destroy();
             die(error_page("Práctica 8","<h1>Práctica 8</h1><p>No ha podido realizarse la consulta: ".$error_dni."</p>"));
         }
     }
@@ -197,8 +203,11 @@ if(isset($_POST["btnContNuevo"]))
         catch(Exception $e)
         {
             mysqli_close($conexion);
+            session_destroy();
             die(error_page("Práctica 8","<h1>Práctica 8</h1><p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
         }
+
+        $mensaje="Usuario insertado con éxito";
 
         if($_FILES["foto"]["name"]!="")
         {
@@ -217,13 +226,18 @@ if(isset($_POST["btnContNuevo"]))
                 {
                     unlink("Img/".$nombre_foto);//Al no poder actualizar borro la nueva que acabo de mover
                     mysqli_close($conexion);
+                    session_destroy();
                     die(error_page("Práctica 8","<h1>Práctica 8</h1><p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
                 }
-            }    
+            }
+            else{
+                $mensaje=", pero con la imagen por defecto";
+            }
 
         }
 
         mysqli_close($conexion);
+        $_SESSION["mensaje"]="Usuario insertado con éxito";
         header("Location:index.php");
         exit;
     }
@@ -478,6 +492,10 @@ if(isset($_POST["btnContBorrar"]))
     if(isset($_POST["btnNuevoUsuario"]) || isset($_POST["btnContNuevo"]))
     {
         require "vistas/vista_nuevo_usuario.php";
+    }
+
+    if(isset($_SESSION)){
+        echo "<p class='sesion'></p>";
     }
 
     require "vistas/vista_tabla_principal.php";

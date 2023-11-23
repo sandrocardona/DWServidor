@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require "src/ctes_funciones.php";
 
 if(isset($_POST["btnContEditar"]))
@@ -19,7 +21,10 @@ if(isset($_POST["btnContEditar"]))
         $error_usuario=repetido_editando($conexion,"usuarios","usuario",$_POST["usuario"],"id_usuario",$_POST["btnContEditar"]);
             
          if(is_string($error_usuario))
+        {
+            session_destroy();
             die($error_usuario);
+        }
     }
     $error_clave=strlen($_POST["clave"])>15;
     $error_email=$_POST["email"]=="" || strlen($_POST["email"])>50 || !filter_var($_POST["email"],FILTER_VALIDATE_EMAIL);
