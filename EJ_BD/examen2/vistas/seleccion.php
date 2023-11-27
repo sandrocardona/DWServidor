@@ -30,8 +30,12 @@
             echo "<form action='index.php' method='post'>";
             echo "<label for='sel'>Selecciona un alumno:</label>";
             echo "<select name='alumno' id='alumno'>";
-            while($tupla=mysqli_fetch_assoc($resultado)){
-                echo "<option value='".$tupla["nombre"]."'>".$tupla["nombre"]."</option>";
+            while($datos_alumno=mysqli_fetch_assoc($resultado)){
+                if(isset($_POST["alumno"]) && $_POST["alumno"]==$datos_alumno["cod_alu"]){
+                    echo "<option selected value='".$datos_alumno["cod_alu"]."'>".$datos_alumno["nombre"]."</option>";
+                    $nombre_alumno=$datos_alumno["nombre"];
+                }else
+                    echo "<option selected value='".$datos_alumno["cod_alu"]."'>".$datos_alumno["nombre"]."</option>";
             }
             echo "</select>";
             echo "<button type='submit' name='btnVerNotas'>ver notas</button>";

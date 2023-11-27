@@ -12,6 +12,7 @@ catch(Exception $e){
 require "vistas/seleccion.php";
 
 if(isset($_POST["btnVerNotas"])){
+    
     require "vistas/mostrar_notas.php";
 }
 
