@@ -14,7 +14,7 @@
 <body>
     <?php
     if(isset($conexion)){
-        $consulta="select asignaturas.denominacion, notas.notas from asignaturas, notas where asignaturas.cod_asig = notas.cod_asig and cod_alu = ".$_POST["alumno"]."";
+        $consulta="select asignaturas.denominacion, notas.notas from asignaturas, notas where asignaturas.cod_asig = notas.cod_asig and cod_alu = ".$_SESSION["id_alumno"]."";
         $resultado=mysqli_query($conexion, $consulta);
     }
     else{
@@ -40,8 +40,8 @@
             echo "<td>".$tupla["denominacion"]."</td>";
             echo "<td>".$tupla["notas"]."</td>";
             echo "<td><form action='index.php' method='post'>";
-            echo "<button class='link' type='submit' name='btnBorrar' value='".$_POST["alumno"]."'>Borrar</button> - ";
-            echo "<button class='link' type='submit' name='btnEditar' value='".$_POST["alumno"]."'>Editar</button>";
+            echo "<button class='link' type='submit' name='btnBorrar' value='".$_SESSION["id_alumno"]."'>Borrar</button> - ";
+            echo "<button class='link' type='submit' name='btnEditar' value='".$_SESSION["id_alumno"]."'>Editar</button>";
             echo "</form></td>";
             echo "</tr>";
         }

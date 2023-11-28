@@ -32,11 +32,11 @@
             echo "<label for='sel'>Selecciona un alumno:</label> &nbsp";
             echo "<select name='alumno' id='alumno'>";
             while($datos_alumno=mysqli_fetch_assoc($resultado)){
-                if(isset($_POST["alumno"]) && $_POST["alumno"]==$datos_alumno["cod_alu"]){
+                if(isset($_POST["alumno"]) && $_POST["alumno"]==$datos_alumno["cod_alu"] || isset($_SESSION["id_alumno"]) && $_SESSION["id_alumno"]==$datos_alumno["cod_alu"]){
                     echo "<option selected value='".$datos_alumno["cod_alu"]."'>".$datos_alumno["nombre"]."</option>";
                     $nombre_alumno=$datos_alumno["nombre"];
                 }else
-                    echo "<option selected value='".$datos_alumno["cod_alu"]."'>".$datos_alumno["nombre"]."</option>";
+                    echo "<option value='".$datos_alumno["cod_alu"]."'>".$datos_alumno["nombre"]."</option>";
             }
             echo "</select>&nbsp";
             echo "<button type='submit' name='btnVerNotas'>ver notas</button>";
