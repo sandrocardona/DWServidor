@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        table{border: 1px solid black; border-collapse: collapse;}
-        th{border: 1px solid black; background-color: lightblue;}
-        td{border: 1px solid black;}
+        table{border: 1px solid black; border-collapse: collapse; width: 50%; text-align: center;}
+        th{border: 1px solid black; background-color: lightblue; text-align: center;}
+        td{border: 1px solid black; text-align: center;}
+        .link{border: none; background: none; text-decoration: underline; color: blue; cursor: pointer;}
     </style>
 </head>
 <body>
@@ -38,9 +39,10 @@
             echo "<tr>";
             echo "<td>".$tupla["denominacion"]."</td>";
             echo "<td>".$tupla["notas"]."</td>";
-/*             echo "<td>";
-            echo <button></button>
-            echo "</td>"; */
+            echo "<td><form action='index.php' method='post'>";
+            echo "<button class='link' type='submit' name='btnBorrar' value='".$_POST["alumno"]."'>Borrar</button> - ";
+            echo "<button class='link' type='submit' name='btnEditar' value='".$_POST["alumno"]."'>Editar</button>";
+            echo "</form></td>";
             echo "</tr>";
         }
         ?>

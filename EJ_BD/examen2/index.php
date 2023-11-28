@@ -12,8 +12,13 @@ catch(Exception $e){
 require "vistas/seleccion.php";
 
 if(isset($_POST["btnVerNotas"])){
-    
+    /*código para mantener los id*/
     require "vistas/mostrar_notas.php";
+}
+
+if(isset($_POST["btnBorrar"])){
+    $prueba=$_POST["alumno"];
+    echo "<p>".$prueba."</p>";
 }
 
 ?>

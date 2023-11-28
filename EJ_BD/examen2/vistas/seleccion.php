@@ -27,8 +27,9 @@
 
         /* MUESTRO LA SELECCION DE ALUMNOS */
         if(mysqli_num_rows($resultado)>0){
+            /* inicio formulario */
             echo "<form action='index.php' method='post'>";
-            echo "<label for='sel'>Selecciona un alumno:</label>";
+            echo "<label for='sel'>Selecciona un alumno:</label> &nbsp";
             echo "<select name='alumno' id='alumno'>";
             while($datos_alumno=mysqli_fetch_assoc($resultado)){
                 if(isset($_POST["alumno"]) && $_POST["alumno"]==$datos_alumno["cod_alu"]){
@@ -37,9 +38,10 @@
                 }else
                     echo "<option selected value='".$datos_alumno["cod_alu"]."'>".$datos_alumno["nombre"]."</option>";
             }
-            echo "</select>";
+            echo "</select>&nbsp";
             echo "<button type='submit' name='btnVerNotas'>ver notas</button>";
             echo "</form>";
+            /* fin del formulario */
         }
 
         /* SI NO EXISTEN ALUMNOS */
