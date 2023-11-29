@@ -21,6 +21,8 @@
         try{
             $conexion=mysqli_connect(SERVIDOR, NOMBRE, PWD, BD);
             mysqli_set_charset($conexion, "utf8");
+            $consulta="select asignaturas.denominacion, notas.notas from asignaturas, notas where asignaturas.cod_asig = notas.cod_asig and cod_alu = ".$_SESSION["id_alumno"]."";
+            $resultado=mysqli_query($conexion, $consulta);
         }
         catch(Exception $e){
             die("<p>No se ha podido conectar a la bd: ".$e->getMessage()."</p></body></html>");
@@ -40,8 +42,8 @@
             echo "<td>".$tupla["denominacion"]."</td>";
             echo "<td>".$tupla["notas"]."</td>";
             echo "<td><form action='index.php' method='post'>";
-            echo "<button class='link' type='submit' name='btnBorrar' value='".$_SESSION["id_alumno"]."'>Borrar</button> - ";
-            echo "<button class='link' type='submit' name='btnEditar' value='".$_SESSION["id_alumno"]."'>Editar</button>";
+            echo "<input type='hidden' name='alumno' value'".$_SESSION["id_alumno"]."'/><button class='link' type='submit' name='btnBorrar' value='".$tupla["cod_asig"]."'>Borrar</button> - ";
+            echo "<input type='hidden' name='alumno' value'".$_SESSION["id_alumno"]."'/><button class='link' type='submit' name='btnEditar' value='".$tupla["cod_asig"]."'>Editar</button>";
             echo "</form></td>";
             echo "</tr>";
         }

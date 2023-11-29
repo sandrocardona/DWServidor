@@ -24,9 +24,18 @@ if(isset($_POST["btnVerNotas"])){
 }
 
 if(isset($_POST["btnBorrar"])){
+    /*Continuo mostrando la tabla de notas*/
     require "vistas/mostrar_notas.php";
-    echo "<p>".$_SESSION["id_alumno"]."</p>";
-    echo "<p>".$_SESSION["nombre"]."</p>";
+
+    /*Pruebas para ver qué hay almacenado en la variable*/
+    echo "<p>SESSION[id_alumno]: ".$_SESSION["id_alumno"]."</p>";
+
+    echo "<p> SESSION[nombre]: ".$_SESSION["nombre"]."</p>";
+
+    echo "<p> SESSION[nota]: ".$_SESSION["id_asig"]."</p>";
+
+    /*Aquí va el código para borrar la nota del alumno*/
+
 }
 
 ?>
