@@ -27,6 +27,8 @@ if(isset($_POST["btnBorrar"])){
     /*Continuo mostrando la tabla de notas*/
     require "vistas/mostrar_notas.php";
 
+    $_SESSION["nota"]=$nota;
+
     /*Pruebas para ver qué hay almacenado en la variable*/
     echo "<p>SESSION[id_alumno]: ".$_SESSION["id_alumno"]."</p>";
 
