@@ -5,6 +5,7 @@ try{
     mysqli_set_charset($conexion,"utf8");
 }
 catch(Exception $e){
+    session_destroy();
     die(error_form("Base vacía","<p>No se ha podido conectar a la base de datos ".$e->getMessage()."</p>"));
 }
 try{
@@ -12,6 +13,7 @@ try{
     $resultado = mysqli_query($conexion,$consulta);
 }
 catch(Exception $e){
+    session_destroy();
     die(error_form("Consulsta fallida","<p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
 }
 
@@ -36,7 +38,7 @@ if(mysqli_num_rows($resultado)>0){
     echo "<button type='submit' name='btnVerNotas'>Ver Notas</button>";
     echo "</form>";
 
-    /* Al pulsar btnVerNotas se muestra Asignatura y notas del alumno */
+    /* AL PULSAR btnVerNotas SE MUESTRA ASIGNATURA Y NOTAS DEL ALUMNO */
 
     if(isset($_POST["id_alumno"])){
         echo "<h2>Notas del alumno: ".$nombre_alumno."</h2>";
@@ -50,13 +52,26 @@ if(mysqli_num_rows($resultado)>0){
             </tr>
             <?php
                 try{
-                    /* Dame las asignaturas del id alumno y las notas de la asignatura del id alumno */
-                    /* cod_asig del cod_alumno y las notas.nota de la cod_asig del cod_alumno */
-                    $consulta = "";
+                    $consulta = "SELECT asignaturas.cod_asig, asignaturas.denominacion, notas.notas from asignaturas, notas WHERE asignaturas.cod_asig = notas.cod_asig AND notas.cod_alu = ".$id_alumno.";";
                     $resultado = mysqli_query($conexion,$consulta);
                 }
                 catch(Exception $e){
+                    session_destroy();
                     die(error_form("Consulta","<p>Error al consultar las notas</p>"));
+                }
+
+                while($tupla=mysqli_fetch_assoc($resultado)){
+                    echo "<tr>";
+                    echo "<td>".$tupla["denominacion"]."</td>";
+                    echo "<td>".$tupla["notas"]."</td>";
+                    echo "<td><form action='index.php' method='post'>";
+                    /* BOTON BORRAR NOTA DE ALUMNO */
+                        /* quiero borrar la notas.notas de la asignaturas.cod_asig donde he clickado */
+                    echo "<input type='hidden' name='id_alumno' value='".$id_alumno."'/><button name='btnBorrar' value='".$tupla["cod_asig"]."' >Borrar</button>&nbsp;&nbsp";
+                    /* BOTON EDITAR NOTA DE ALUMNO */
+                    echo "<button>Editar</button>";
+                    echo "</form></td>";
+                    echo "</tr>";
                 }
             ?>
         </table>
