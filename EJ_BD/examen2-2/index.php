@@ -12,14 +12,19 @@ require "./vistas/constantes.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        table{border: 1px solid black;border-collapse: collapse; width: 75%; text-align: center;}
+        table{border: 1px solid black;border-collapse: collapse; width: 50%; text-align: center;}
         th{background-color: lightblue;border: 1px solid black; border-collapse: collapse; text-align: center;}
+        td{border: 1px solid black; border-collapse: collapse; text-align: center;}
     </style>
 </head>
 <body>
     <h1>Nota de los alumnos</h1>
     <?php
         require "./vistas/selec_alumno.php";
+
+        if(isset($_POST["btnBorrar"])){
+            require "./vistas/borrar_nota.php";
+        }
     ?>
 </body>
 </html>
