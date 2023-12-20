@@ -17,7 +17,13 @@ if(isset($_SESSION["usuario"]))
     require "src/seguridad.php";
 
     //Vista oportuna
+    //si es usuario normal
     require "vistas/vista_examen.php";
+    //si es usuario admin
+    /* 
+        header("Location:ruta");
+        exit;
+     */
     
     mysqli_close($conexion);
 }

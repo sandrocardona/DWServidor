@@ -18,7 +18,7 @@ if(isset($_POST["btnLogin"]))
         }
 
         try{
-           $consulta="select usuario from usuarios where usuario='".$_POST["usuario"]."' and clave='".md5($_POST["clave"])."'";
+           $consulta="select usuario, tipo from usuarios where usuario='".$_POST["usuario"]."' and clave='".md5($_POST["clave"])."'";
            $resultado=mysqli_query($conexion, $consulta);
         }
         catch(Exception $e)
@@ -33,6 +33,7 @@ if(isset($_POST["btnLogin"]))
             $_SESSION["usuario"]=$_POST["usuario"];
             $_SESSION["clave"]=md5($_POST["clave"]);
             $_SESSION["ultima_accion"]=time();
+            $_SESSION["tipo"]=$_POST["tipo"];
             mysqli_free_result($resultado);
             mysqli_close($conexion);
             header("Location:index.php");
