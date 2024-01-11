@@ -8,11 +8,11 @@ class Pelicula{
     private $recargo;
 
     function __construct($nombre,$director,$precio,$alquilada,$fecha_prev_devolucion){
-        $this->
-        $this->
-        $this->
-        $this->
-        $this->
+        $this->nombre=$nombre;
+        $this->director=$director;
+        $this->precio=$precio;
+        $this->alquilada=$alquilada;
+        $this->fecha_prev_devolucion=$fecha_prev_devolucion;
     }
 
     function getNombre(){
@@ -31,7 +31,7 @@ class Pelicula{
         return $this->alquilada;
     }
 
-    function getNombre(){
+    function getFecha(){
         return $this->fecha_prev_devolucion->format('d/m/Y');
     }
 
