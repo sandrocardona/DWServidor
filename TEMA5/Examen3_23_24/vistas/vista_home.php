@@ -7,21 +7,14 @@
         $error_form=$error_usuario||$error_clave;
         if(!$error_form)
         {
-/*             try{
-                $consulta="select * from usuarios where lector='".$_POST["usuario"]."' and clave='".md5($_POST["clave"])."'";
-                $resultado=mysqli_query($conexion,$consulta);
-            }
-            catch(Exception $e)
-            {
-                session_destroy();
-                mysqli_close($conexion);
-                die(error_page("Examen3 Curso 23-24","<h1>Librería</h1><p>No se ha podido realizar la consulta: ".$e->getMessage()."</p>"));
-            } */
+
+            /* CONSULTA PDO */
 
             try{
                 $consulta="select * from usuarios where lector=? and clave=?";
                 $sentencia=$conexion->prepare($consulta);
-                $sentencia->execute([$_POST["usuario"],md5($_POST["clave"])]);
+                $clave=md5($_POST["clave"]);
+                $sentencia->execute([$_POST["usuario"],$clave]);
             }
             catch(Exception $e)
             {
@@ -54,15 +47,23 @@
 
                 if($sentencia->rowCount()<=0)
                 {
-                    echo "<p>No hay usuarios con esas credenciales en la BD</p>";
+                    echo "<p>No hay usuarios con esas credenciales en la BD (vista_home.php)</p>";
+                    $error_usuario=true;
                 }
                 else {
                     $tupla=$sentencia->fetch(PDO::FETCH_ASSOC);
-                    echo "<p>El nombre del usuario logueado es: ".$tupla["nombre"]."</p>";
+                    echo "<p>El nombre del usuario logueado es: <strong>".$tupla["lector"]."</strong> tipo del usuario: <strong>".$tupla["tipo"]."</strong></p>";
+/*                     $tipo_usuario=$tupla["tipo"];
+                    
+                    if($tipo_usuario=="admin"){
+                        header("Location:admin/gest_libros.php");
+                    } else {
+                        header("Location:index.php");
+                    } */
                 }
                     
          
-            mysqli_free_result($resultado);
+/*             mysqli_free_result($resultado); */
         }
 
     }

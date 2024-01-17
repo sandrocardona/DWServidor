@@ -21,7 +21,7 @@ catch(PDOException $e)
     die("<p>No ha podido conectarse a la base de datos".$e->getMessage()."</p></body></html>");
 }
 
-echo "<p>conectado</p>";
+echo "<p>conectado (index.php)</p>";
 
 if(isset($_SESSION["usuario"]))
 {
