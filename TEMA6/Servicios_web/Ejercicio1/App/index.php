@@ -23,9 +23,9 @@
         return $respuesta;
     }
     
-    $datos["cod"]="YYYYYY";
+    $datos["cod"]="YYYYYZ";
     $datos["nombre"]="Producto a borrar";
-    $datos["nombre_corto"]="producto a borrar";
+    $datos["nombre_corto"]="producto a insertar";
     $datos["descripcion"]="Descripcion del producto";
     $datos["PVP"]=25.5;
     $datos["familia"]="MP3";
@@ -33,12 +33,14 @@
     $url=DIR_SERV."/producto/insertar";
     $respuesta=consumir_servicios_REST($url,"POST",$datos);
     $obj=json_decode($respuesta);
+
     if(!$obj)
         die("<p>Error consumiendo el servicio: ".$url."</p>".$respuesta);
 
     if(isset($obj->mensaje_error))
         die("<p>".$url."</p>".$respuesta);
 
+        echo $obj->mensaje;
 
     ?>
 </body>
