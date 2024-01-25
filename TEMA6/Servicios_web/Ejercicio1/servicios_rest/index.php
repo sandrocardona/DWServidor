@@ -65,8 +65,9 @@ $app->get('/familias',function(){
 
 /* ejercicio1.g) */
 
-$app->get('/repetido/{tabla}/{columna}/{valor}',function(){
-    echo json_encode(repetido($tabla,$columna,$valor));
+$app->get('/repetido/{tabla}/{columna}/{valor}',function($request){
+    
+    echo json_encode(repetido($datos));
 });
 
 $app->run();
