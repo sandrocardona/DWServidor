@@ -180,4 +180,32 @@ function repetido($tabla,$columna,$valor){
     return $respuesta;
 }
 
+/* OBTENER FAMILIAS */
+
+function obtener_familias(){
+    try{
+        $conexion=new PDO("mysql:host=".SERVIDOR_BD.";dbname=".NOMBRE_BD,USUARIO_BD,CLAVE_BD,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")); //la sentencia entre paréntesis no hay que memorizarla
+    }
+    catch(PDOException $e){
+
+        return array("mensaje_error"=>"no se ha podido conectar a la BD: ".$e->getMessage());
+    }
+
+    try{
+      $consulta="select * from familia";
+      $sentencia=$conexion->prepare($consulta);
+      $sentencia->execute();
+    }
+    catch(PDOException $e){
+        $sentencia=null;
+        $conexion=null;
+        return array("mensaje_error"=>"no se ha podido realizar consulta: ".$e->getMessage());
+    }
+
+    $respuesta["familias"]=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $sentencia=null;
+    $conexion=null;
+    return $respuesta;
+}
+
 ?>

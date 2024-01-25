@@ -30,8 +30,8 @@
     $datos["PVP"]=25.5;
     $datos["familia"]="MP3";
 
-    $url=DIR_SERV."/producto/insertar";
-    $respuesta=consumir_servicios_REST($url,"POST",$datos);
+    $url=DIR_SERV."/familias";
+    $respuesta=consumir_servicios_REST($url,"GET");
     $obj=json_decode($respuesta);
 
     if(!$obj)
@@ -40,7 +40,10 @@
     if(isset($obj->mensaje_error))
         die("<p>".$url."</p>".$respuesta);
 
-        echo $obj->mensaje;
+        foreach($obj->familias as $tupla)
+        {
+            echo "<p>".$tupla->nombre."</p>";
+        }
 
     ?>
 </body>

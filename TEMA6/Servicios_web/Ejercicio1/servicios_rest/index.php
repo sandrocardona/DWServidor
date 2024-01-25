@@ -56,15 +56,17 @@ $app->delete('/producto/borrar/{cod}',function($request){
     echo json_encode(borrar_producto($request->getAttribute("cod")));
 });
 
-/* ? */
+/* ejercicio1.f) */
 
-/* $app->get('/familias',function(){
+$app->get('/familias',function(){
 
     echo json_encode(obtener_familias());
-}); */
+});
 
-$app->get('',function($request){
+/* ejercicio1.g) */
 
+$app->get('/repetido/{tabla}/{columna}/{valor}',function(){
+    echo json_encode(repetido($tabla,$columna,$valor));
 });
 
 $app->run();
