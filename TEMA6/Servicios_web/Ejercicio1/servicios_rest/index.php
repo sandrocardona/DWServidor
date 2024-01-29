@@ -17,8 +17,8 @@ $app->get('/productos', function(){
 
 /* ejercicio1.b) */
 $app->get('/producto/{cod}', function($request){
-
-    echo json_encode(obtener_producto($request->getAttribute('cod')));
+    $respuesta=obtener_producto($request->getAttribute('cod'));
+    echo json_encode($respuesta);
 });
 
 /* ejercicio1.c) */

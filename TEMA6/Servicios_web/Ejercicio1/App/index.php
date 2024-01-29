@@ -7,8 +7,10 @@
 </head>
 <body>
     <?php
-    
-    define("DIR_SERV","http://localhost/Proyectos/DWServidor/TEMA6/Servicios_web/Ejercicio1/servicios_rest");
+    //url clase
+/*     define("DIR_SERV","http://localhost/Proyectos/DWServidor/TEMA6/Servicios_web/Ejercicio1/servicios_rest");
+ */    //url casa
+    define("DIR_SERV","http://localhost/DAW/DWES/DWServidor.git/TEMA6/Servicios_web/Ejercicio1/servicios_rest");
 
     function consumir_servicios_REST($url,$metodo,$datos=null)
     {
@@ -23,12 +25,12 @@
         return $respuesta;
     }
     
-    $datos["cod"]="YYYYYZ";
-    $datos["nombre"]="Producto a borrar";
-    $datos["nombre_corto"]="producto a insertar";
-    $datos["descripcion"]="Descripcion del producto";
-    $datos["PVP"]=25.5;
-    $datos["familia"]="MP3";
+    $datos["cod"]="AAAAAA";
+    $datos["nombre"]="insertado";
+    $datos["nombre_corto"]="ins";
+    $datos["descripcion"]="no muerto";
+    $datos["PVP"]=50;
+    $datos["familia"]="camara";
 
     $url=DIR_SERV."/familias";
     $respuesta=consumir_servicios_REST($url,"GET");
@@ -45,6 +47,31 @@
             echo "<p>".$tupla->nombre."</p>";
         }
 
+    $url=DIR_SERV."/producto/".urlencode("3DSNG");
+    $respuesta=consumir_servicios_REST($url,"GET");
+    $obj=json_decode($respuesta);
+
+    if(!$obj)
+        die("<p>Error consumiendo el servicio: ".$url."</p>".$respuesta);
+
+    if(isset($obj->mensaje_error))
+        die("<p>".$url."</p>".$respuesta);
+
+/*         echo "<p>".$respuesta."</p>"; */
+
+    echo "<p>".$obj->producto[0]->nombre_corto."</p>";
+
+    $url=DIR_SERV."/producto/insertar";
+    $respuesta=consumir_servicios_REST($url, "POST", $datos);
+    $obj=json_decode($respuesta);
+
+    if(!$obj)
+        die("<p>Error consumiendo el servicio: ".$url."</p>".$respuesta);
+    
+    if(isset($obj->mensaje_error)) 
+        die("<p>".$url."</p>".$respuesta);
+
+    echo "<p>".$obj->mensaje."</p>";
     ?>
 </body>
 </html>

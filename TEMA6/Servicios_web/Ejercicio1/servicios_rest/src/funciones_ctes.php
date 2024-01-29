@@ -5,6 +5,7 @@ define("USUARIO_BD","jose");
 define("CLAVE_BD","josefa");
 define("NOMBRE_BD","bd_tienda");
 
+
 /* OBTENER PRODUCTOS */
 
 function obtener_productos(){
