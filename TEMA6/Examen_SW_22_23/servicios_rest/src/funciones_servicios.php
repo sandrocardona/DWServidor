@@ -1,36 +1,36 @@
 <?php
 require "config_bd.php";
 
-function conexion_pdo()
-{
+function login($lector,$clave){
+    session_start();
     try{
         $conexion= new PDO("mysql:host=".SERVIDOR_BD.";dbname=".NOMBRE_BD,USUARIO_BD,CLAVE_BD,array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES 'utf8'"));
-        
-        $respuesta["mensaje"]="Conexi&oacute;n a la BD realizada con &eacute;xito";
-        
-        $conexion=null;
     }
     catch(PDOException $e){
-        $respuesta["error"]="Imposible conectar:".$e->getMessage();
+        $respuesta["error"]="Imposible conectar:".$e->getMessage()." en funciones_servicios.php";
+        session_destroy();
     }
-    return $respuesta;
-}
 
+    try{
+        $consulta="select * from usuarios where lector=? and clave=?";
+        $sentencia=$conexion->prepare($consulta);
+        $sentencia->execute([$lector,$clave]);
+    }
+    catch(PDOException $e){
+        $conexion=null;
+        $sentencia=null;
+        session_destroy();
+        return array("error"=>"No se ha podido realizar la consulta en funciones_servicios.php");
+    }
 
-function conexion_mysqli()
-{
-  
-    try
-    {
-        $conexion=mysqli_connect(SERVIDOR_BD,USUARIO_BD,CLAVE_BD,NOMBRE_BD);
-        mysqli_set_charset($conexion,"utf8");
-        $respuesta["mensaje"]="Conexi&oacute;n a la BD realizada con &eacute;xito";
-        mysqli_close($conexion);
+    $obj=$sentencia->fetch(PDO::FETCH_ASSOC);
+    if(!$obj){
+        return array("mensaje"=>"Usuario no registrado en BD");
+    } else {
+
+        return array("usuario"=>$lector,"api_session"=>session_id());
     }
-    catch(Exception $e)
-    {
-        $respuesta["error"]="Imposible conectar:".$e->getMessage();
-    }
+
     return $respuesta;
 }
 ?>
