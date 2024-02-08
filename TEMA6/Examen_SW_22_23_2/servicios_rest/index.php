@@ -13,6 +13,20 @@ $app->get('/conexion_PDO',function($request){
 });
 
 
+/* servicio login */
+$app->post("/login",function($request){
+    $lector=$request->getParam("lector");
+    $clave=$request->getParam("clave");
+
+    echo json_encode(login($lector, $clave));
+});
+
+/* servicio obtenerLibros */
+$app->get("/obtenerLibros",function(){
+    echo json_encode(obtenerLibros());
+});
+
+
 
 // Una vez creado servicios los pongo a disposición
 $app->run();
