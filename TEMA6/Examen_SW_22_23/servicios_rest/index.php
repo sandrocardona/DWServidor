@@ -19,13 +19,16 @@ $app->post('/login',function($request){
     echo json_encode(login($lector,$clave));
 });
 
-$app->get('/login',function($request){
-    $lector="scardona";
-    $clave=md5("123");
-    echo json_encode(login($lector,$clave));
+/* b) logueado */
+
+
+/* c) salir */
+
+
+/* d) obtenerLibros */
+$app->get('/obtenerLibros',function(){
+    echo json_encode(obtenerLibros());
 });
-
-
 
 // Una vez creado servicios los pongo a disposición
 $app->run();
