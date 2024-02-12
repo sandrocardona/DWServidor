@@ -8,16 +8,13 @@ $app= new \Slim\App;
 
 
 $app->get('/conexion_PDO',function($request){
-
     echo json_encode(conexion_pdo());
 });
 
-$app->get('/conexion_MYSQLI',function($request){
-    
-    echo json_encode(conexion_mysqli());
+/* ===== OBTENER LIBROS ===== */
+$app->get('/obtenerLibros',function($request){
+    echo json_encode(obtenerLibros());
 });
-
-
 
 // Una vez creado servicios los pongo a disposición
 $app->run();
