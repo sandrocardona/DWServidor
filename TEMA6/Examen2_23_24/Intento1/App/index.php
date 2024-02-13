@@ -55,7 +55,7 @@ if(isset($_POST["btnVer"])){
         <button type="submit" name="btnVer">Ver Horario</button>
         </form>
         <?php
-        if(isset($_POST["btnVer"])){
+        if(isset($_POST["btnVer"]) || isset($_POST["btnEditar"])){
             $url=DIR_SERV."/obtenerHorario";
             $respuesta=consumir_servicios_REST($url,"POST",$datos);
             $obj2=json_decode($respuesta);
@@ -95,9 +95,9 @@ if(isset($_POST["btnVer"])){
                 } else {
                     for ($j=1; $j <=5 ; $j++) {
                         if(isset($horarios[$j][$i]))
-                            echo "<td>".$horarios[$j][$i]."<form action='index.php' method='post'><button class='link'>editar</button></form></td>";
+                            echo "<td>".$horarios[$j][$i]."<form action='index.php' method='post'><button name='btnEditar' class='link'>editar</button></form></td>";
                         else
-                        echo "<td><form action='index.php' method='post'><button class='link'>editar</button></form></td>";
+                            echo "<td><form action='index.php' method='post'><button name='btnEditar' class='link'>editar</button></form></td>";
                     }
                 }
                 echo "</tr>";
