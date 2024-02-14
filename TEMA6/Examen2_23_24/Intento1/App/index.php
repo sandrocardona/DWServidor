@@ -3,9 +3,7 @@ require "./src/ctes.php";
 session_name("horarios");
 session_start();
 
-if(isset($_POST["btnVer"])){
 
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -42,7 +40,7 @@ if(isset($_POST["btnVer"])){
                 }
 
                 foreach($obj->profesores as $tupla){
-                    if(isset($_POST["profesor"]) && $_POST["profesor"]==$tupla->id_usuario){
+                    if(isset($_POST["profesor"])  && ($_POST["profesor"]==$tupla->id_usuario)){
                         echo "<option selected value='".$tupla->id_usuario."'>".$tupla->nombre."</option>";
                         $datos["id_profesor"]=$tupla->id_usuario;
                         $nombre_profesor=$tupla->nombre;
@@ -52,10 +50,10 @@ if(isset($_POST["btnVer"])){
                 }
             ?>
         </select>
-        <button type="submit" name="btnVer">Ver Horario</button>
+        <button type="submit" name="btnHorario">Ver Horario</button>
         </form>
         <?php
-        if(isset($_POST["btnVer"]) || isset($_POST["btnEditar"])){
+        if(isset($_POST["profesor"])){
             $url=DIR_SERV."/obtenerHorario";
             $respuesta=consumir_servicios_REST($url,"POST",$datos);
             $obj2=json_decode($respuesta);
@@ -95,17 +93,18 @@ if(isset($_POST["btnVer"])){
                 } else {
                     for ($j=1; $j <=5 ; $j++) {
                         if(isset($horarios[$j][$i]))
-                            echo "<td>".$horarios[$j][$i]."<form action='index.php' method='post'><button name='btnEditar' class='link'>editar</button></form></td>";
+                            echo "<td>".$horarios[$j][$i]."<form action='index.php' method='post'><input type='hidden' name='dia' value='sandro'/><button name='profesor' value='".$datos["id_profesor"]."' class='link'>Editar</button></form></td>";
                         else
-                            echo "<td><form action='index.php' method='post'><button name='btnEditar' class='link'>editar</button></form></td>";
+                            echo "<td><form action='index.php' method='post'><button name='profesor' value='".$datos["id_profesor"]."'class='link'>Editar</button></form></td>";
                     }
                 }
                 echo "</tr>";
             }
             echo "</table>";
         }
-
-        
+        if(isset($_POST["dia"])){
+            echo "<h1>".$_POST["dia"]."</<h1>";
+        }
         ?>
     </body>
 </html>
