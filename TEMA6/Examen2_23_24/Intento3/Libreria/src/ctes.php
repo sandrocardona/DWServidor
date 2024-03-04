@@ -1,8 +1,6 @@
 <?php
 /* variables constantes */
-/* clase */
-define("DIR_SERV","http://localhost/Proyectos/DWServidor/TEMA6/Examen_SW_22_23/Examen_SW_22_23_4/servicios_rest/");
-
+define("DIR_SERV","http://localhost/DAW/DWES/DWServidor.git/TEMA6/Examen2_23_24/Intento3/servicios_rest/");
 
 /* funciones constantes */
 function consumir_servicios_REST($url,$metodo,$datos=null)
