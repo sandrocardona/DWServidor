@@ -40,7 +40,7 @@ function login($datos)
         /* recoger los datos */
         $respuesta["usuario"]=$sentencia->fetch(PDO::FETCH_ASSOC);
         /* iniciar la sesion */
-        session_name("api_recuperacion");
+        session_name("recuperacion22-23");
         session_start();
         /* asignar valor a las variables */
         $_SESSION["usuario"]=$respuesta["usuario"]["usuario"];
@@ -55,5 +55,7 @@ function login($datos)
     
     return $respuesta;
 }
+
+
 
 ?>

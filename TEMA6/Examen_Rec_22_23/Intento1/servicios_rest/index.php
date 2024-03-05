@@ -20,6 +20,14 @@ $app->get('/conexion_PDO',function($request){
     echo json_encode(conexion_pdo($datos));
 });
 
+/* === salir === */
+$app->get('/conexion_PDO',function($request){
+    session_id($request->getParam("api_session"));
+    session_start();
+    session_destroy();
+    echo json_encode(array('logout'=>'close session'));
+});
+
 // Una vez creado servicios los pongo a disposición
 $app->run();
 ?>
