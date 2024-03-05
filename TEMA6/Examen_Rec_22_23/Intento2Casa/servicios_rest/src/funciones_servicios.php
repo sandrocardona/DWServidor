@@ -36,13 +36,17 @@ function login($datos)
         $conexion=null;
     }
 
-    session_name("Intento2casa");
-    session_start();
-
-    $respuesta["usuario"]=$sentencia->fetch(PDO::FETCH_ASSOC);
-    $_SESSION["usuario"]=$respuesta["usuario"]["usuario"];
-    $_SESSION["clave"]=$respuesta["usuario"]["clave"];
-    $_SESSION["api_session"]=session_id();
+    if($sentencia->rowCount() > 0){
+        session_name("Intento2casa");
+        session_start();
+    
+        $respuesta["usuario"]=$sentencia->fetch(PDO::FETCH_ASSOC);
+        $_SESSION["usuario"]=$respuesta["usuario"]["usuario"];
+        $_SESSION["clave"]=$respuesta["usuario"]["clave"];
+        $_SESSION["api_session"]=session_id();
+    } else {
+        $respuesta["mensaje"]="El usuario no se encuentra registrado en la BD";
+    }
 
     return $respuesta;
 }
