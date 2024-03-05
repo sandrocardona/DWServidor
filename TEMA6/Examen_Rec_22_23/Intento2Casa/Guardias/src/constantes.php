@@ -1,9 +1,6 @@
 <?php
-/* variables constantes */
-/* define("DIR_SERV","http://localhost/Proyectos/DWServidor/TEMA6/Examen_Rec_22_23/Intento1/servicios_rest/"); */
 /* casa */
-define("DIR_SERV","http://localhost/DAW/DWES/DWServidor.git/TEMA6/Examen_Rec_22_23/Intento1/servicios_rest");
-/* funciones */
+define("DIR_SERV","http://localhost/DAW/DWES/DWServidor.git/TEMA6/Examen_Rec_22_23/Intento2Casa/servicios_rest/");
 function consumir_servicios_REST($url,$metodo,$datos=null)
 {
     $llamada=curl_init();
