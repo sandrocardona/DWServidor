@@ -51,4 +51,34 @@ function login($datos)
     return $respuesta;
 }
 
+/* === login === */
+function logueado($usuario,$clave)
+{
+    try{
+        $conexion= new PDO("mysql:host=".SERVIDOR_BD.";dbname=".NOMBRE_BD,USUARIO_BD,CLAVE_BD,array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES 'utf8'"));
+    }
+    catch(PDOException $e){
+        $respuesta["error"]="Imposible conectar a la DB en logueado()";
+    }
+
+    try{
+        $consulta="SELECT * FROM usuarios WHERE usuario=? AND clave=?";
+        $sentencia=$conexion->prepare($consulta);
+        $sentencia->execute([$usuario,$clave]);
+    }
+    catch(PDOException $e){
+        $respuesta["error"]="Imposible realizar la consulta a la DB en logueado()";
+        $conexion=null;
+    }
+
+    if($sentencia->rowCount() > 0){
+
+        $respuesta["usuario"]=$sentencia->fetch(PDO::FETCH_ASSOC);
+    } else {
+        $respuesta["mensaje"]="Ya no se encuentra registrado en la BD. En logueado()";
+    }
+
+    return $respuesta;
+}
+
 ?>

@@ -26,7 +26,7 @@ if(isset($_POST["btnEntrar"])){
             $_SESSION["usuario"]=$datos["usuario"];
             $_SESSION["clave"]=$datos["clave"];
             $_SESSION["ult_accion"]=time();
-            $_SESSION["api_session"]["api_session"]=$obj_login->api_session;
+            $_SESSION["api_session"]=$obj_login->api_session;
 
             header("Location:index.php");
 
@@ -55,14 +55,17 @@ if(isset($_POST["btnEntrar"])){
             <input type="text" name="usuario" value="">
             <?php
                 if(isset($_POST["btnEntrar"]) && $error_usuario){
-                    echo "<span class='error'>Campo vacío</span>";
+                    if($_POST["usuario"]=="")
+                        echo "<span class='error'>Campo vacío</span>";
+                    else
+                        echo "<span class='error'>Usuario o pwd no valido</span>";
                 }
             ?>
         </p>
         <!-- contraseña -->
         <p>
             <label for="clave">Contraseña</label>
-            <input type="text" name="clave" value="">
+            <input type="password" name="clave" value="">
             <?php
                 if(isset($_POST["btnEntrar"]) && $error_clave){
                     echo "<span class='error'>Campo vacío</span>";
