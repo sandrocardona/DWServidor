@@ -2,6 +2,7 @@
 
 /* variables */
 define("DIR_SERV","http://localhost/DAW/DWES/DWServidor.git/TEMA6/Examen_Rec_22_23/Intento3Casa/servicios_rest/");
+define("MINUTOS","5");
 /* funciones */
 function consumir_servicios_REST($url,$metodo,$datos=null)
 {

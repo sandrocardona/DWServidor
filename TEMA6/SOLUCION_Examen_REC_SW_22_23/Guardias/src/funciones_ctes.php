@@ -1,5 +1,5 @@
 <?php
-define("DIR_SERV","http://localhost/Proyectos/Examen_REC_SW_22_23/servicios_rest");
+define("DIR_SERV","http://localhost/DAW/DWES/DWServidor.git/TEMA6/SOLUCION_Examen_REC_SW_22_23/servicios_rest/");
 define("MINUTOS","5");
 
 function consumir_servicios_REST($url,$metodo,$datos=null)

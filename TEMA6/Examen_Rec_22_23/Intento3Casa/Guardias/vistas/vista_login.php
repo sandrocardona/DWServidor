@@ -28,7 +28,7 @@ if(isset($_POST["btnLogin"])){
             $_SESSION["usuario"]=$datos["usuario"];
             $_SESSION["clave"]=$datos["clave"];
             $_SESSION["ult_accion"]=time();
-            $_SESSION["api_session"]["api_session"]=$obj_login->api_session;
+            $_SESSION["api_session"]=$obj_login->api_session;
 
             header("Location:index.php");
 
@@ -76,5 +76,11 @@ if(isset($_POST["btnLogin"])){
         </p>
         <button type="submit" name="btnLogin">Entrar</button>
     </form>
+    <?php
+    if(isset($_SESSION["mensaje"])){
+        echo "<p>".$_SESSION["mensaje"]."</p>";
+        session_destroy();
+    }
+    ?>
 </body>
 </html>

@@ -28,6 +28,21 @@ $app->post('/salir',function($request){
     echo json_encode(array("logout"=>"Close session"));
 });
 
+/* === logueado === */
+$app->post('/logueado',function($request){
+    session_id($request->getParam("api_session"));
+    session_start();
+
+    if(isset($_SESSION["usuario"])){
+        $datos[]=$_SESSION["usuario"];
+        $datos[]=$_SESSION["clave"];
+        echo json_encode(logueado($datos));
+    } else {
+        session_destroy();
+        echo json_encode(array("No_auth"=>"No autorizado"));
+    }
+});
+
 // Una vez creado servicios los pongo a disposición
 $app->run();
 ?>
