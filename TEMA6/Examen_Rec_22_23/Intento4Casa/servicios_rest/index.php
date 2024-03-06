@@ -20,6 +20,21 @@ $app->post('/login',function($request){
     echo json_encode(login($datos));
 });
 
+/* === login === */
+$app->post('/logueado',function($request){
+    session_id($request->getParam("api_session"));
+    session_start();
+    if(isset($_SESSION["usuario"])){
+        $datos[]=$_SESSION["usuario"];
+        $datos[]=$_SESSION["clave"];
+
+        echo json_encode(logueado($datos));
+    } else {
+        session_destroy();
+        echo json_encode(array("no_auth"=>"No autorizado"));
+    }
+});
+
 /* === salir === */
 $app->post('/salir',function($request){
     session_id($request->getParam("api_session"));

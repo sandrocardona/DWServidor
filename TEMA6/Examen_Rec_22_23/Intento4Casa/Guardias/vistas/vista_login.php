@@ -21,16 +21,16 @@ if(isset($_POST["btnLogin"])){
         }
 
         if(isset($obj_login->mensaje)){
-            session_destroy();
-            die(error_page("NO OBJ","LOGIN", $obj_login->mensaje));
+            $error_usuario=true;
+        } else {
+            $_SESSION["usuario"]=$datos["usuario"];
+            $_SESSION["clave"]=$datos["usuario"];
+            $_SESSION["ult_accion"]=time();
+            $_SESSION["api_session"]=$obj_login->api_session;
+            
+            header("Location:index.php");
+            exit;
         }
-
-        $_SESSION["usuario"]=$datos["usuario"];
-        $_SESSION["clave"]=$datos["usuario"];
-        $_SESSION["api_session"]=$obj_login->api_session;
-
-        header("Location:index.php");
-        exit;
     }
 }
 ?>
@@ -54,7 +54,11 @@ if(isset($_POST["btnLogin"])){
             <input type="text" name="usuario" value="<?php if(isset($_POST["usuario"])) echo $_POST["usuario"] ?>">
             <?php
                 if(isset($_POST["btnLogin"]) && $error_usuario){
-                    echo "<span class='error'>Campo vacío</span>";
+                    if($_POST["usuario"]==""){
+                        echo "<span class='error'>Campo vacío</span>";
+                    } else {
+                        echo "<span class='error'>Usuario o contraseña incorrecto</span>";
+                    }
                 }
             ?>
         </p>
@@ -70,5 +74,11 @@ if(isset($_POST["btnLogin"])){
         </p>
         <button type="submit" name="btnLogin">Entrar</button>
     </form>
+    <?php
+    if(isset($_SESSION["mensaje"])){
+        echo "<p>".$_SESSION["mensaje"]."</p>";
+        session_destroy();
+    }
+    ?>
 </body>
 </html>
