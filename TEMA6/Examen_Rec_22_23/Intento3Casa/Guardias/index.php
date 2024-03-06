@@ -5,7 +5,7 @@ require "./src/constantes.php";
 
 if(isset($_POST["btnSalir"])){
     $url=DIR_SERV."/salir";
-    consumir_servicios_REST($url, "POST", $_SESSION["api_session"]);
+    consumir_servicios_REST($url, "POST", $datos);
     session_destroy();
     header("location:index.php");
     exit;

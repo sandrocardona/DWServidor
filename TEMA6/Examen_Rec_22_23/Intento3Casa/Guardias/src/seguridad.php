@@ -21,7 +21,7 @@ if(isset($obj_seguridad->mensaje)){
     exit;
 }
 
-if(isset($obj_seguridad->no_auth)){
+if(isset($obj_seguridad->No_auth)){
     session_unset();
     $_SESSION["mensaje"]="tiempo de sesion ha expirado por la api";
     header("Location:index.php");
@@ -29,6 +29,7 @@ if(isset($obj_seguridad->no_auth)){
 }
 
 $datos_log=$obj_seguridad->usuario;
+
 if(time() - $_SESSION["ult_accion"] > MINUTOS*60){
     session_unset();
     $_SESSION["mensaje"]="tiempo de sesión expirado por aplicación";

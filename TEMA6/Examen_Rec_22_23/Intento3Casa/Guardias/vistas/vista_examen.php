@@ -32,7 +32,7 @@
 </head>
 <body>
     <h1>Gestión de Guardias</h1>
-    <p>Bienvenido <?php echo $_SESSION["usuario"] ?></p>
+    <p>Bienvenido <?php echo $datos_log->usuario?></p>
     <form action="index.php" method="post"><button name="btnSalir">Salir</button></form>
     <!-- tabla -->
     <h2>Equipos de Guardia</h2>

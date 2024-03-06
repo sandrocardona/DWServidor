@@ -34,9 +34,7 @@ $app->post('/logueado',function($request){
     session_start();
 
     if(isset($_SESSION["usuario"])){
-        $datos[]=$_SESSION["usuario"];
-        $datos[]=$_SESSION["clave"];
-        echo json_encode(logueado($datos));
+        echo json_encode(logueado($_SESSION["usuario"],$_SESSION["clave"]));
     } else {
         session_destroy();
         echo json_encode(array("No_auth"=>"No autorizado"));
