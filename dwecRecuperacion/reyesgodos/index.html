@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyes Godos</title>
+</head>
+<body>
+    <ul id="listareyes"></ul>
+    <script>
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let objJSON = JSON.parse(this.responseText);
+                let datos = objJSON.reyesgodos;
+                let listareyes = document.getElementById("listareyes");
+                console.log(datos);
+                verReyes(listareyes, datos);
+            }
+        };
+
+        url = "reyes.php";
+
+        xhttp.open("GET", url, true);
+        xhttp.send();
+
+        function verReyes(lista, data){
+            let listanombres = data.forEach(e => {
+                let texto;
+                if(typeof e === "object"){
+                    var ul = document.createElement("UL");
+                    lista.appendChild(ul);
+                    verReyes(ul, e);
+                } else {
+                    var li = document.createElement("LI");
+                    texto = document.createTextNode(e);
+                    li.appendChild(texto);
+                    lista.appendChild(li);
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
